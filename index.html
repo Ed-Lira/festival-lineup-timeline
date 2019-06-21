@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+  <title>Pitchfork, Sunday Line-up</title>
+
+  <style>
+    body, html {
+	  font-family: 'Rubik', sans-serif;
+      font-size: 11pt;
+    }
+
+    #visualization {
+      box-sizing: border-box;
+      width: 100%;
+      height: 300px;
+    }
+	
+	.vis-timeline, .vis-panel.vis-bottom, .vis-panel.vis-center, .vis-panel.vis-left, .vis-panel.vis-right, .vis-panel.vis-top, .vis-labelset, .vis-label {
+		border: none !important;
+	}
+	
+    .vis-labelset .vis-label{
+		text-transform: uppercase;
+		font-weight: bold;
+		text-align: right;
+	}
+	
+	.vis-item { 
+		color: #FFF !important; 
+		border: none !important;
+		font-weight: 700 !important;
+		font-size: small;
+	}
+	
+    .vis-item.red  { background-color: #FF1744; }
+	.vis-labelset .vis-label.red {color: #FF1744 !important;}
+    .vis-item.green { background-color: #00E676; }
+	.vis-labelset .vis-label.green {color: #00E676 !important;}
+    .vis-item.blue { background-color: #536DFE; }
+	.vis-labelset .vis-label.blue {color: #536DFE !important;}
+  </style>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet"> 
+</head>
+<body>
+<div id="visualization"></div>
+
+<script>
+	function getTimeDate(time){
+		return Date.parse('21 Jul 2019 ' + time +':00 CDT');
+	}
+
+	var groups = new vis.DataSet([
+		{"content": "Red Stage", "id": "Red Stage", "value": 1, className:'red'},
+		{"content": "Green Stage", "id": "Green Stage", "value": 2, className:'green'},
+		{"content": "Blue Stage", "id": "Blue Stage", "value": 3, className:'blue'},
+	]);
+
+	var items = new vis.DataSet([
+		{start: getTimeDate('1:00'), end: getTimeDate('1:40'), group:"Green Stage", className:"green", content:"⭐Dreezy",id:"dreezy"},
+		{start: getTimeDate('1:45'), end: getTimeDate('2:25'), group:"Red Stage", className:"red", content:"Flasher",id:"flasher"},
+		{start: getTimeDate('2:30'), end: getTimeDate('3:15'), group:"Green Stage", className:"green", content:"black midi",id:"blackmidi"},
+		{start: getTimeDate('2:45'), end: getTimeDate('3:30'), group:"Blue Stage", className:"blue", content:"Tasha",id:"tasha"},
+		{start: getTimeDate('3:20'), end: getTimeDate('4:10'), group:"Red Stage", className:"red", content:"⭐JPEGMAFIA",id:"jpegmafia"},
+		{start: getTimeDate('4:00'), end: getTimeDate('4:45'), group:"Blue Stage", className:"blue", content:"Ibeyi",id:"ibeyi"},
+		{start: getTimeDate('4:15'), end: getTimeDate('5:10'), group:"Green Stage", className:"green", content:"⭐Clairo",id:"clairo"},
+		{start: getTimeDate('5:15'), end: getTimeDate('6:10'), group:"Red Stage", className:"red", content:"Khruangbin",id:"khruangbin"},
+		{start: getTimeDate('5:15'), end: getTimeDate('6:10'), group:"Blue Stage", className:"blue", content:"Amen Dunes",id:"amendunes"},
+		{start: getTimeDate('6:15'), end: getTimeDate('7:15'), group:"Green Stage", className:"green", content:"⭐Whitney",id:"whitney"},
+		{start: getTimeDate('6:30'), end: getTimeDate('7:15'), group:"Blue Stage", className:"blue", content:"Neneh Cherry",id:"nenehcherry"},
+		{start: getTimeDate('7:25'), end: getTimeDate('8:25'), group:"Red Stage", className:"red", content:"⭐Charli XCX",id:"charliexcx"},
+		{start: getTimeDate('7:45'), end: getTimeDate('8:30'), group:"Blue Stage", className:"blue", content:"⭐Snail Mail",id:"snailmail"},
+		{start: getTimeDate('8:30'), end: getTimeDate('9:50'), group:"Green Stage", className:"green", content:"⭐Robyn",id:"robyn"}
+	])
+
+	var container = document.getElementById('visualization');
+	var options = {
+		groupTemplate: function(group){
+		  var container = document.createElement('div');
+		  var label = document.createElement('span');
+		  label.innerHTML = group.content + ' ';
+		  container.insertAdjacentElement('afterBegin',label);
+		  return container;
+		},
+		orientation: 'both',
+		editable: false,
+		selectable: false,
+		groupEditable: false,
+		start: getTimeDate('1:00'),
+		end: getTimeDate('9:50'),
+		min: getTimeDate('1:00'),
+		max: getTimeDate('9:50')
+	};
+
+	var timeline = new vis.Timeline(container);
+	timeline.setOptions(options);
+	timeline.setGroups(groups);
+	timeline.setItems(items);
+</script>
+</body>
+</html>
