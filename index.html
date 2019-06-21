@@ -33,6 +33,11 @@
 		font-size: small;
 	}
 	
+	.vis-labelset .vis-label .vis-inner, .vis-item .vis-item-content {
+		font-size: 26px;
+		height: 25vh;
+	}
+	
     .vis-item.red  { background-color: #FF1744; }
 	.vis-labelset .vis-label.red {color: #FF1744 !important;}
     .vis-item.green { background-color: #00E676; }
@@ -54,26 +59,26 @@
 	}
 
 	var groups = new vis.DataSet([
-		{"content": "Red Stage", "id": "Red Stage", "value": 1, className:'red'},
-		{"content": "Green Stage", "id": "Green Stage", "value": 2, className:'green'},
-		{"content": "Blue Stage", "id": "Blue Stage", "value": 3, className:'blue'},
+		{"content": "", "id": "Red", "value": 1, className:'red'},
+		{"content": "", "id": "Green", "value": 2, className:'green'},
+		{"content": "", "id": "Blue", "value": 3, className:'blue'},
 	]);
 
 	var items = new vis.DataSet([
-		{start: getTimeDate('1:00'), end: getTimeDate('1:40'), group:"Green Stage", className:"green", content:"⭐Dreezy",id:"dreezy"},
-		{start: getTimeDate('1:45'), end: getTimeDate('2:25'), group:"Red Stage", className:"red", content:"Flasher",id:"flasher"},
-		{start: getTimeDate('2:30'), end: getTimeDate('3:15'), group:"Green Stage", className:"green", content:"black midi",id:"blackmidi"},
-		{start: getTimeDate('2:45'), end: getTimeDate('3:30'), group:"Blue Stage", className:"blue", content:"Tasha",id:"tasha"},
-		{start: getTimeDate('3:20'), end: getTimeDate('4:10'), group:"Red Stage", className:"red", content:"⭐JPEGMAFIA",id:"jpegmafia"},
-		{start: getTimeDate('4:00'), end: getTimeDate('4:45'), group:"Blue Stage", className:"blue", content:"Ibeyi",id:"ibeyi"},
-		{start: getTimeDate('4:15'), end: getTimeDate('5:10'), group:"Green Stage", className:"green", content:"⭐Clairo",id:"clairo"},
-		{start: getTimeDate('5:15'), end: getTimeDate('6:10'), group:"Red Stage", className:"red", content:"Khruangbin",id:"khruangbin"},
-		{start: getTimeDate('5:15'), end: getTimeDate('6:10'), group:"Blue Stage", className:"blue", content:"Amen Dunes",id:"amendunes"},
-		{start: getTimeDate('6:15'), end: getTimeDate('7:15'), group:"Green Stage", className:"green", content:"⭐Whitney",id:"whitney"},
-		{start: getTimeDate('6:30'), end: getTimeDate('7:15'), group:"Blue Stage", className:"blue", content:"Neneh Cherry",id:"nenehcherry"},
-		{start: getTimeDate('7:25'), end: getTimeDate('8:25'), group:"Red Stage", className:"red", content:"⭐Charli XCX",id:"charliexcx"},
-		{start: getTimeDate('7:45'), end: getTimeDate('8:30'), group:"Blue Stage", className:"blue", content:"⭐Snail Mail",id:"snailmail"},
-		{start: getTimeDate('8:30'), end: getTimeDate('9:50'), group:"Green Stage", className:"green", content:"⭐Robyn",id:"robyn"}
+		{start: getTimeDate('1:00'), end: getTimeDate('1:40'), group:"Green", className:"green", content:"⭐Dreezy",id:"dreezy"},
+		{start: getTimeDate('1:45'), end: getTimeDate('2:25'), group:"Red", className:"red", content:"Flasher",id:"flasher"},
+		{start: getTimeDate('2:30'), end: getTimeDate('3:15'), group:"Green", className:"green", content:"black midi",id:"blackmidi"},
+		{start: getTimeDate('2:45'), end: getTimeDate('3:30'), group:"Blue", className:"blue", content:"Tasha",id:"tasha"},
+		{start: getTimeDate('3:20'), end: getTimeDate('4:10'), group:"Red", className:"red", content:"⭐JPEGMAFIA",id:"jpegmafia"},
+		{start: getTimeDate('4:00'), end: getTimeDate('4:45'), group:"Blue", className:"blue", content:"Ibeyi",id:"ibeyi"},
+		{start: getTimeDate('4:15'), end: getTimeDate('5:10'), group:"Green", className:"green", content:"⭐Clairo",id:"clairo"},
+		{start: getTimeDate('5:15'), end: getTimeDate('6:10'), group:"Red", className:"red", content:"Khruangbin",id:"khruangbin"},
+		{start: getTimeDate('5:15'), end: getTimeDate('6:10'), group:"Blue", className:"blue", content:"Amen Dunes",id:"amendunes"},
+		{start: getTimeDate('6:15'), end: getTimeDate('7:15'), group:"Green", className:"green", content:"⭐Whitney",id:"whitney"},
+		{start: getTimeDate('6:30'), end: getTimeDate('7:15'), group:"Blue", className:"blue", content:"Neneh Cherry",id:"nenehcherry"},
+		{start: getTimeDate('7:25'), end: getTimeDate('8:25'), group:"Red", className:"red", content:"⭐Charli XCX",id:"charliexcx"},
+		{start: getTimeDate('7:45'), end: getTimeDate('8:30'), group:"Blue", className:"blue", content:"⭐Snail Mail",id:"snailmail"},
+		{start: getTimeDate('8:30'), end: getTimeDate('9:50'), group:"Green", className:"green", content:"⭐Robyn",id:"robyn"}
 	])
 
 	var container = document.getElementById('visualization');
@@ -90,9 +95,12 @@
 		selectable: false,
 		groupEditable: false,
 		start: getTimeDate('1:00'),
-		end: getTimeDate('9:50'),
+		end: getTimeDate('3:00'),
 		min: getTimeDate('1:00'),
-		max: getTimeDate('9:50')
+		max: getTimeDate('9:50'),
+		autoResize: true,
+		width: '100%',
+		height: '90vh'
 	};
 
 	var timeline = new vis.Timeline(container);
